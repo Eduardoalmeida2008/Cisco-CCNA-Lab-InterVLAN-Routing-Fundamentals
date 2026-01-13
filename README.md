@@ -1,73 +1,43 @@
-# LAB-VLANs-Virtuais
-Laboratório de VLANs, roteador e switch – portfólio
+# Inter-VLAN Routing Fundamentals - CCNA Lab
 
-Laboratório de VLANs – Rede Simulada
-Descrição
+## 📌 Project Overview
+This is a foundational networking laboratory designed to demonstrate the implementation of **VLANs** and **Inter-VLAN Routing**. The project simulates a common enterprise scenario where different departments (VLAN 10 and VLAN 20) need to remain logically isolated at Layer 2 but require routed communication at Layer 3 through a single physical interface.
 
-Este projeto consiste em um laboratório de redes com VLANs, roteador e switch, criado para fins de estudo e prática em redes de computadores. O objetivo é consolidar conhecimentos em:
-Configuração de VLANs
-Subinterfaces em roteadores
-Roteamento entre redes diferentes
-Conectividade entre dispositivos
+## 🏗️ Topology & Infrastructure
+The network consists of a streamlined "Router-on-a-Stick" architecture:
+- **Core Router:** 1x Cisco 1941 Router.
+- **Access Switch:** 1x Cisco 2960-24TT Switch.
+- **End Devices:** 2x Generic PCs representing different network segments.
 
+### Network Addressing Plan
+| Device | VLAN | Subnet | IP Address | Gateway |
+| :--- | :--- | :--- | :--- | :--- |
+| **PC 1** | 10 (Internal) | 192.168.10.0/24 | 192.168.10.10 | 192.168.10.1 |
+| **PC 2** | 20 (Internal) | 192.168.20.0/24 | 192.168.20.10 | 192.168.20.1 |
 
-Topologia
-2 PCs
-1 Switch (ou mais, conforme evolução do lab)
-1 Roteador
+## 🛠️ Configuration Highlights
 
+### 1. Layer 2 Segmentation (Switch)
+- Created VLANs 10 and 20.
+- Assigned access ports to respective VLANs.
+- Configured a **802.1Q Trunk** link to the router.
 
-Estrutura:
-PC1 --- Switch --- Roteador
-PC2 --- 
+### 2. Layer 3 Routing (Router Subinterfaces)
+Implemented subinterfaces on the GigabitEthernet interface to act as default gateways:
+- `interface gig0/0.10`: Encapsulation dot1Q 10 | IP: 192.168.10.1
+- `interface gig0/0.20`: Encapsulation dot1Q 20 | IP: 192.168.20.1
 
-VLAN 10 → PCs da rede interna 10
-VLAN 20 → PCs da rede interna 20
-Roteador → Comunicação entre VLANs e gateway para internet
+## ✅ Validation & Testing
+Connectivity was verified through systematic ICMP testing (Ping):
+- **Local Gateway Test:** Success from both PCs to their respective subinterfaces.
+- **Inter-VLAN Test:** Success communication between PC 1 (VLAN 10) and PC 2 (VLAN 20).
+- **Interface Verification:** Confirmed `up/up` status for all virtual and physical ports.
 
+## 📁 Repository Contents
+- `Topologia.png`: Visual network diagram.
+- `Configuração IP.png`: Static IP assignment evidence.
+- `Teste de Pings.png`: Connectivity validation between segments.
+- `Show_vlan_brief.png`: Logical switch configuration proof.
 
-Configurações
-Roteador
-enable
-configure terminal
-
-# Interface principal
-interface gig0/0
-no ip address
-no shutdown
-exit
-
-# Subinterfaces VLANs
-interface gig0/0.10
-encapsulation dot1Q 10
-ip address 192.168.10.1 255.255.255.0
-no shutdown
-exit
-
-interface gig0/0.20
-encapsulation dot1Q 20
-ip address 192.168.20.1 255.255.255.0
-no shutdown
-exit
-
-Switch
-VLAN 10 e VLAN 20 criadas e atribuídas às portas correspondentes
-
-Conexão trunk para o roteador
-
-Cabos conectados corretamente: PCs → Switch → Roteador
-
-
-Testes de Conectividade
-Ping do PC1 para o gateway 192.168.10.1 → ✅ Sucesso
-
-Ping do PC2 para o gateway 192.168.20.1 → ✅ Sucesso
-
-Ping entre PCs de VLANs diferentes → ✅ Sucesso após configuração de subinterfaces no roteador
-
-
-Aprendizados
-Cada VLAN precisa de uma subinterface do roteador para comunicação entre redes
-VLANs funcionam como redes internas separadas
-Switch organiza e separa as VLANs, enquanto o roteador fornece roteamento
-Conectividade depende de cabos corretos, trunk ativo e interfaces do roteador no no shutdown
+---
+*Developed for educational purposes to master Cisco IOS fundamentals.*
