@@ -1,43 +1,42 @@
-# Inter-VLAN Routing Fundamentals - CCNA Lab
+# Local Area Network Foundation 🌐
 
-## 📌 Project Overview
-This is a foundational networking laboratory designed to demonstrate the implementation of **VLANs** and **Inter-VLAN Routing**. The project simulates a common enterprise scenario where different departments (VLAN 10 and VLAN 20) need to remain logically isolated at Layer 2 but require routed communication at Layer 3 through a single physical interface.
+## 📌 Overview
+This is the starting point of my networking journey. This project demonstrates the most essential concept in infrastructure: **Local Connectivity**. It shows how two end-devices communicate within the same broadcast domain using a Switch as the central intermediary.
 
-## 🏗️ Topology & Infrastructure
-The network consists of a streamlined "Router-on-a-Stick" architecture:
-- **Core Router:** 1x Cisco 1941 Router.
-- **Access Switch:** 1x Cisco 2960-24TT Switch.
-- **End Devices:** 2x Generic PCs representing different network segments.
+> **Status:** Fully Functional ✅
 
-### Network Addressing Plan
-| Device | VLAN | Subnet | IP Address | Gateway |
-| :--- | :--- | :--- | :--- | :--- |
-| **PC 1** | 10 (Internal) | 192.168.10.0/24 | 192.168.10.10 | 192.168.10.1 |
-| **PC 2** | 20 (Internal) | 192.168.20.0/24 | 192.168.20.10 | 192.168.20.1 |
+## 📐 Network Topology
+The topology is simple yet effective for demonstrating Layer 2 principles:
+- **Switch:** Acting as the central distribution point for local traffic.
+- **End Devices:** 2 PCs connected via Ethernet cables, simulating a small office or home office (SOHO) environment.
 
-## 🛠️ Configuration Highlights
+![Network Topology](01_network_Topology.png)
 
-### 1. Layer 2 Segmentation (Switch)
-- Created VLANs 10 and 20.
-- Assigned access ports to respective VLANs.
-- Configured a **802.1Q Trunk** link to the router.
+## 🛠️ Technical Specifications
+- **Hardware:** Cisco Catalyst Switch.
+- **Addressing:** Static IPv4 (Class C).
+- **Communication:** ICMP Protocol (Ping) for reachability testing.
 
-### 2. Layer 3 Routing (Router Subinterfaces)
-Implemented subinterfaces on the GigabitEthernet interface to act as default gateways:
-- `interface gig0/0.10`: Encapsulation dot1Q 10 | IP: 192.168.10.1
-- `interface gig0/0.20`: Encapsulation dot1Q 20 | IP: 192.168.20.1
+## ⚙️ Configuration Workflow
 
-## ✅ Validation & Testing
-Connectivity was verified through systematic ICMP testing (Ping):
-- **Local Gateway Test:** Success from both PCs to their respective subinterfaces.
-- **Inter-VLAN Test:** Success communication between PC 1 (VLAN 10) and PC 2 (VLAN 20).
-- **Interface Verification:** Confirmed `up/up` status for all virtual and physical ports.
+### 1. Physical Layer
+- Connections established using straight-through cables.
+- Interface status verified (Green lights) ensuring physical link stability.
 
-## 📁 Repository Contents
-- `Topologia.png`: Visual network diagram.
-- `Configuração IP.png`: Static IP assignment evidence.
-- `Teste de Pings.png`: Connectivity validation between segments.
-- `Show_vlan_brief.png`: Logical switch configuration proof.
+### 2. Logical Layer (IP Addressing)
+Both hosts were configured within the same subnet (e.g., 192.168.1.0/24) to allow direct communication without the need for a router:
+- **PC-0:** 192.168.1.1
+- **PC-1:** 192.168.1.2
+
+## 🧪 Connectivity Verification
+The "Moment of Truth" was verified through the Command Prompt. The successful ping exchange confirms that the Switch is correctly learning MAC addresses and forwarding traffic.
+
+| Source | Destination | Status |
+| :--- | :--- | :--- |
+| PC-0 | PC-1 | Success (0% Loss) |
+
+![Ping Result](09_connectivity_ping_test.png)
 
 ---
-*Developed for educational purposes to master Cisco IOS fundamentals.*
+**Developed by:** Eduardo Almeida  
+*Building networking expertise from the ground up.*
