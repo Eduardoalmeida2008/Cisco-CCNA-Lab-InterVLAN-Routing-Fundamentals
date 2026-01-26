@@ -10,7 +10,7 @@ The topology is simple yet effective for demonstrating Layer 2 principles:
 - **Switch:** Acting as the central distribution point for local traffic.
 - **End Devices:** 2 PCs connected via Ethernet cables, simulating a small office or home office (SOHO) environment.
 
-![Network Topology](01_network_Topology.png)
+![Network Topology](01_Network_topology.png)
 
 ## 🛠️ Technical Specifications
 - **Hardware:** Cisco Catalyst Switch.
@@ -35,7 +35,7 @@ The "Moment of Truth" was verified through the Command Prompt. The successful pi
 | :--- | :--- | :--- |
 | PC-0 | PC-1 | Success (0% Loss) |
 
-![Ping Result](09_connectivity_ping_test.png)
+![Ping Result](06_Pc1_connectivity_Test.png)
 
 ---
 **Developed by:** Eduardo Almeida  
