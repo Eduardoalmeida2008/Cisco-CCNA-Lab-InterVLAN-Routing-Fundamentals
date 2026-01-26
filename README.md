@@ -1,42 +1,38 @@
-# Local Area Network Foundation 🌐
+# VLAN Segmentation and Layer 2 Isolation 🛡️
 
 ## 📌 Overview
-This is the starting point of my networking journey. This project demonstrates the most essential concept in infrastructure: **Local Connectivity**. It shows how two end-devices communicate within the same broadcast domain using a Switch as the central intermediary.
+This project demonstrates the implementation of logical network segmentation using **VLAN 10** and **VLAN 20** on a Cisco Catalyst Switch. The setup proves how broadcast domains can be isolated at Layer 2 to enhance security.
 
-> **Status:** Fully Functional ✅
+> **Status:** Layer 2 Isolation Verified ✅
+
+---
 
 ## 📐 Network Topology
-The topology is simple yet effective for demonstrating Layer 2 principles:
-- **Switch:** Acting as the central distribution point for local traffic.
-- **End Devices:** 2 PCs connected via Ethernet cables, simulating a small office or home office (SOHO) environment.
+The design showcases two end-devices assigned to distinct virtual networks.
 
 ![Network Topology](01_Network_topology.png)
 
-## 🛠️ Technical Specifications
-- **Hardware:** Cisco Catalyst Switch.
-- **Addressing:** Static IPv4 (Class C).
-- **Communication:** ICMP Protocol (Ping) for reachability testing.
-
-## ⚙️ Configuration Workflow
-
-### 1. Physical Layer
-- Connections established using straight-through cables.
-- Interface status verified (Green lights) ensuring physical link stability.
-
-### 2. Logical Layer (IP Addressing)
-Both hosts were configured within the same subnet (e.g., 192.168.1.0/24) to allow direct communication without the need for a router:
-- **PC-0:** 192.168.1.1
-- **PC-1:** 192.168.1.2
-
-## 🧪 Connectivity Verification
-The "Moment of Truth" was verified through the Command Prompt. The successful ping exchange confirms that the Switch is correctly learning MAC addresses and forwarding traffic.
-
-| Source | Destination | Status |
-| :--- | :--- | :--- |
-| PC-0 | PC-1 | Success (0% Loss) |
-
-![Ping Result](06_Pc1_connectivity_Test.png)
-
 ---
-**Developed by:** Eduardo Almeida  
-*Building networking expertise from the ground up.*
+
+## ⚙️ Configuration & Implementation
+
+### 1. IP Configuration
+Each host was assigned a static IP address within the same subnet, but separated by VLAN tagging.
+
+![IP Configuration](02_Vlan10_ipConfig.png)
+
+### 2. Switch Port Assignment
+Ports were configured in access mode and assigned to their respective VLAN IDs:
+
+```bash
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+
+interface FastEthernet0/2
+ switchport mode access
+ switchport access vlan 20
+````
+ ### 1. Tesst
+
+![TEST](06_Pc1_connectivity_Test.png)
